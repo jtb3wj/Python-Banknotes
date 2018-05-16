@@ -4,4 +4,9 @@ Here we will be using the UCI Machine Learning Repository Banknotes dataset (htt
 The goal here is to determine which banknotes are authentic. Therefore, we will be solving a classification problem. We will try several different algorithms and compare the results.
 
 ## Examining our variables
+
+## Histograms
 ![](plots/variance-histogram.png)
+![](plots/skewness-histogram.png)
+![](plots/curtosis-histogram.png)
+![](plots/entropy-histogram.png)

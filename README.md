@@ -5,6 +5,8 @@ The goal here is to determine which banknotes are authentic. Therefore, we will 
 
 ## Examining our variables
 
+It's hard to stray away from my statistics background, so I always like to first visually examine some of the variables that I'll be using. We make one for each one of our predictor variables.
+
 ## Histograms
 ![](plots/variance-histogram.png)
 ![](plots/skewness-histogram.png)

@@ -2,13 +2,15 @@
 # Author: Jacob Bailey
 
 
-import sklearn as skl
+from sklearn.model_selection import train_test_split
+from sklearn import tree
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn import svm
+from sklearn.linear_model import LogisticRegression
 import pandas as pd
 import scipy as sy
 import os
-import time
 import matplotlib.pyplot as plt
 
 
@@ -21,11 +23,11 @@ banknotes = pd.read_csv('data/data_banknote_authentication.txt', names=['varianc
 
 # convert to array
 X = banknotes[['variance', 'skewness', 'curtosis', 'entropy']].as_matrix()
-y = banknotes[['class']].as_matrix()
+y = banknotes[['class']].as_matrix()[:,0]
 
 
 
-# Reference for building histogram (https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.histogram.html)
+
 # We will make four histograms
 
 # Variance
@@ -52,42 +54,67 @@ plt.title('Histogram of Entropy')
 plt.savefig('plots/entropy-histogram.png')
 plt.close()
 
-# now let us start the fun part....building models
-# we reference (http://scikit-learn.org/stable/tutorial/basic/tutorial.html#learning-and-predicting)
-#clf = svm.SVC(gamma=0.001, C=100.)
+
 
 # create training and test datasets
-X_train, X_test, y_train, y_test = skl.model_selection.train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 
 
 ## LOGISTIC REGRESSION
-# https://towardsdatascience.com/logistic-regression-using-python-sklearn-numpy-mnist-handwriting-recognition-matplotlib-a6b31e2b166a
-logisticRegr = skl.linear_model.LogisticRegression()
+logisticRegr = LogisticRegression()
 # now let us fit our model
-logisticRegr.fit(X_train, y_train[:,0])
+logisticRegr.fit(X_train, y_train)
 # predictions
 predictions = logisticRegr.predict(X_test)
 # get the score of the model
 score = logisticRegr.score(X_test, y_test)
-# 0.989090
+# achieves score of 0.989090
+
+
 
 ## LINEAR DISCRIMINANT ANALYSIS
 linearDA = LinearDiscriminantAnalysis()
 # fit linear discriminant model
-linearDA.fit(X_train, y_train[:,0])
+linearDA.fit(X_train, y_train)
 # make predictions
 lda_predictions = linearDA.predict(X_test)
 # get the score of the model
 score_lda = linearDA.score(X_test, y_test)
-# 0.974545
+# achieves score of 0.974545
+
+
 
 ## SUPPORT VECTOR MACHINE
 supportVecMach = svm.LinearSVC()
 # fit support vector machine
-supportVecMach.fit(X_train, y_train[:,0])
+supportVecMach.fit(X_train, y_train)
 # make predictions
 svm_predictions = supportVecMach.predict(X_test)
 # get the score of the model
 score_svm = supportVecMach.score(X_test, y_test)
-# 0.989009
+# achieves score of 0.989009
+
+
+
+## DECISION TREE
+decisionTree = tree.DecisionTreeClassifier()
+# fit decision tree
+decisionTree.fit(X_train, y_train)
+# make predictions
+tree_predictions = decisionTree.predict(X_test)
+# get the score of the model
+score_tree = decisionTree.score(X_test, y_test)
+# achieves score of 0.996363
+
+
+
+# GRADIENT BOOSTER CLASSIFIER
+# fit model
+gradientBstCls = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, 
+max_depth=1.0, random_state=0).fit(X_train, y_train)
+# make predictions
+gbc_predictions = gradientBstCls.predict(X_test)
+# get the score of the model
+score_gbc = gradientBstCls.score(X_test, y_test)
+# achieves score of 1.0

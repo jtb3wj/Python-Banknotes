@@ -5,7 +5,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn import tree
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.ensemble import GradientBoostingClassifier
 from sklearn import svm
 from sklearn.linear_model import LogisticRegression
 import pandas as pd
@@ -108,13 +107,3 @@ score_tree = decisionTree.score(X_test, y_test)
 # achieves score of 0.996363
 
 
-
-# GRADIENT BOOSTER CLASSIFIER
-# fit model
-gradientBstCls = GradientBoostingClassifier(n_estimators=100, learning_rate=1.0, 
-max_depth=1.0, random_state=0).fit(X_train, y_train)
-# make predictions
-gbc_predictions = gradientBstCls.predict(X_test)
-# get the score of the model
-score_gbc = gradientBstCls.score(X_test, y_test)
-# achieves score of 1.0

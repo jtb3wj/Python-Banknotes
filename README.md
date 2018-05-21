@@ -1,7 +1,7 @@
 # Python-Banknotes
-Here we will be using the UCI Machine Learning Repository Banknotes dataset (https://archive.ics.uci.edu/ml/datasets/banknote+authentication) to showcase some machine learning examples in python. Many of the ideas here are found in the book *Introduction to Statistical Learning*.
+Here we will be using the UCI Machine Learning Repository Banknotes dataset (https://archive.ics.uci.edu/ml/datasets/banknote+authentication) to showcase some machine learning examples in python. Many of the ideas here are found in the book *Introduction to Statistical Learning* (https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370).
 
-The goal here is to determine which banknotes are authentic. Therefore, we will be solving a classification problem. We will try several different algorithms and compare the results.
+The goal here is to determine which banknotes are authentic. Therefore, we will be solving a classification problem where we try to identify whether a particular banknote is authentic or not. For more details, please refer to the dataset in the link above. We will use several different algorithms, implemented in the python scikit learn library
 
 ## Examining our variables
 
@@ -45,7 +45,7 @@ X = banknotes[['variance', 'skewness', 'curtosis', 'entropy']].as_matrix()
 y = banknotes[['class']].as_matrix()[:,0]
 ```
 
-Now that we have read in some data, we will take a look at the distribution of our variables. With a statistics background, I typically perfer to use histograms to examine the data. Now, it's not always terribly important that we do this since we are using our variables for prediction rather than inference, but *meiner meinung* you have to build a relationship with your data and get to know it.
+Now that we have read in some data, we will take a look at the distribution of our variables. With a statistics background, I typically perfer to use histograms to examine the data. Now, although we might take a different perspective in viewing our variable distributions with a prediction goal in mind as opposed to one of inference, but in *meiner meinung* you have to build a relationship with your data and get to know it.
 
 
 ### Variance
